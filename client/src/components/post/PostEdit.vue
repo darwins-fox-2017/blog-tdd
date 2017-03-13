@@ -5,30 +5,29 @@
     <br/>
     <h2>Edit an item</h2>
     <el-form ref="form" :model="form" label-width="120px">
-        <el-form-item label="Name">
-            <el-input v-model="form.name"></el-input>
+        <el-form-item label="Title">
+            <el-input v-model="form.title" @blur="slugIt()"></el-input>
         </el-form-item>
-        <el-form-item label="Price">
-            <el-input placeholder="Price" v-model="form.price">
-                <template slot="prepend">Rp.
+        <el-form-item label="Content Body">
+            <el-input type="textarea" :rows="2" placeholder="Please input" v-model="form.body">
+            </el-input>
+        </el-form-item>
+        <el-form-item label="Slug URL">
+            <el-input placeholder="Slug URL" v-model="form.slug">
+                <template slot="prepend">Http://dikyarga.com/
                 </template>
-              </el-input>
-      </el-form-item>
-        <el-form-item label="Image URL">
-            <el-input placeholder="Image URL" v-model="form.pictlink">
-                <template slot="prepend">Http://
-                </template>
-              </el-input>
-      </el-form-item>
+            </el-input>
+        </el-form-item>
 
-  <el-form-item label="Description">
-    <el-input type="textarea" v-model="form.description"></el-input>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="onSubmit">Update item</el-button>
-    <el-button @click.native="backToList">Cancel</el-button>
-  </el-form-item>
-</el-form>
+        <el-form-item label="Publised ?">
+            <el-switch v-model="form.published" on-text="" off-text="">
+            </el-switch>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="onSubmit">Update blogpost</el-button>
+            <el-button @click.native="backToList()">Cancel</el-button>
+        </el-form-item>
+    </el-form>
   </div>
 </template>
 
@@ -47,27 +46,27 @@ export default {
         }
     },
     created() {
-      this.getItem()
+      this.getPost()
     },
     methods: {
         backToList() {
-            this.$router.push('/items/')
+            this.$router.push('/posts/')
         },
         onSubmit() {
           let self = this
-          axios.put(host + '/items/' + self.$route.params.id + '/update', self.form).then(x => {
+          axios.put(host + '/posts/' + self.$route.params.id, self.form).then(x => {
             console.log(x);
               if(x.status){
-                self.$router.push('/items')
+                self.$router.push('/posts')
               } else {
                 console.log('something wrong');
               }
           })
           console.log('submit!');
         },
-        getItem(){
+        getPost(){
           let self = this
-          axios.get(host + '/items/' + self.$route.params.id + '/edit').then(item => {
+          axios.get(host + '/posts/' + self.$route.params.id).then(item => {
             self.form = item.data
           })
         }

@@ -10,7 +10,7 @@
         </el-table-column>
         <el-table-column prop="slug" label="Slug">
         </el-table-column>
-        <el-table-column prop="created_at" label="Created At">
+        <el-table-column prop="createdAt" label="Created At">
         </el-table-column>
         <el-table-column label="Operations">
             <template scope="scope">
@@ -35,36 +35,37 @@ let host = 'http://localhost:3000/api';
 export default {
     data() {
         return {
-            items: []
+            posts: []
         }
     },
     created() {
         console.log('run');
-        this.getItems()
+        this.getPosts()
     },
 
     methods: {
-        getItems() {
+        getPosts() {
+          console.log('running');
             let self = this;
-            axios.get(host + '/items')
+            axios.get(host + '/posts')
                 .then(response => {
                     // JSON responses are automatically parsed.
-                    self.items = response.data
+                    self.posts = response.data
                 })
                 .catch(e => {
                     console.log(e);
                 })
         },
         addItem() {
-            this.$router.push('/items/new')
+            this.$router.push('/posts/new')
         },
         handleDelete(index, row) {
-            this.items.slice(index, 1)
+            this.posts.slice(index, 1)
             let self = this
-            axios.delete(host + '/items/' + row.id).then(response => {
+            axios.delete(host + '/posts/' + row.id).then(response => {
                 console.log(response);
                 if (response.status) {
-                    self.getItems()
+                    self.getPosts()
                 } else {
                     self.$notify({
                         title: 'Error',
@@ -75,7 +76,7 @@ export default {
             })
         },
         handleEdit(index, row) {
-            this.$router.push('/items/' + row.id + '/edit')
+            this.$router.push('/posts/' + row.id + '/edit')
         },
         formatter(row, column) {
             return row.address;

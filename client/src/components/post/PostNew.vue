@@ -1,66 +1,77 @@
+
+
 <template>
+
 <div class="">
     <el-button type="primary" @click.native="backToList">back to list</el-button>
     <br/>
     <br/>
     <h2>Add new blogpost</h2>
     <el-form ref="form" :model="form" label-width="120px">
-        <el-form-item label="Name">
-            <el-input v-model="form.name"></el-input>
+        <el-form-item label="Title">
+            <el-input v-model="form.title" @blur="slugIt()"></el-input>
         </el-form-item>
-        <el-form-item label="Price">
-            <el-input placeholder="Price" v-model="form.price">
-                <template slot="prepend">Rp.
+        <el-form-item label="Content Body">
+            <el-input type="textarea" :rows="2" placeholder="Please input" v-model="form.body">
+            </el-input>
+        </el-form-item>
+        <el-form-item label="Slug URL">
+            <el-input placeholder="Slug URL" v-model="form.slug">
+                <template slot="prepend">Http://dikyarga.com/
                 </template>
-              </el-input>
-      </el-form-item>
-        <el-form-item label="Image URL">
-            <el-input placeholder="Image URL" v-model="form.pictlink">
-                <template slot="prepend">Http://
-                </template>
-              </el-input>
-      </el-form-item>
+            </el-input>
+        </el-form-item>
 
-  <el-form-item label="Description">
-    <el-input type="textarea" v-model="form.description"></el-input>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="onSubmit">Add item</el-button>
-    <el-button>Cancel</el-button>
-  </el-form-item>
-</el-form>
-  </div>
+        <el-form-item label="Publised ?">
+            <el-switch v-model="form.published" on-text="" off-text="">
+            </el-switch>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="onSubmit">Posting blogpost</el-button>
+            <el-button>Cancel</el-button>
+        </el-form-item>
+    </el-form>
+</div>
+
 </template>
 
 <script>
+
 import axios from 'axios';
+import slug from 'slug'
 let host = 'http://localhost:3000/api';
 export default {
     data() {
-        return {
-            form: {
-                name: '',
-                price: '',
-                pictlink: '',
-                description: ''
+            return {
+                form: {
+                    title: '',
+                    body: '',
+                    slug: '',
+                    published: true
+                }
             }
-        }
-    },
-    methods: {
-        backToList() {
-            this.$router.push('/items/')
         },
-        onSubmit() {
-          let self = this
-          axios.post(host + '/items/new', self.form).then(x => {
-              if(x.status){
-                self.$router.push('/items')
-              } else {
-                console.log('something wrong');
-              }
-          })
-          console.log('submit!');
+        methods: {
+            backToList() {
+                    this.$router.push('/posts/')
+                },
+                slugIt() {
+                    this.form.slug = slug(this.form.title, {
+                        lower: true
+                    })
+                },
+                onSubmit() {
+                    let self = this
+                    axios.post(host + '/posts/', self.form).then(x => {
+                        if (x.status) {
+                            self.$router.push('/posts')
+                        } else {
+                            console.log('something wrong');
+                        }
+                    })
+                    console.log('submit!');
+                }
         }
-    }
 }
+
 </script>
