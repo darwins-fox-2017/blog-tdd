@@ -40,7 +40,8 @@ describe('get all articles',function () {
   })
 })
 
-describe('get all articles',function () {
+
+describe('get one article by slug',function () {
   it('should get an article with slug hello-world when calling http://localhost300/api/articles/hello-world with GET method', function (done) {
     chai.request('http://localhost:3000/api')
     .get('/articles/hello-world')
@@ -52,8 +53,20 @@ describe('get all articles',function () {
   })
 })
 
+describe('update article', function () {
+  it('should update data and send msg if succeed', function (done) {
+    chai.request('http://localhost:3000/api')
+    .put('/articles/hello-world')
+    .end(function (err,res) {
+      res.should.have.status(200);
+      res.body.msg.should.equal('data has been successfully updated')
+      done()
+    })
+  })
+})
 
-describe('delete an article by Id', function () {
+
+describe('delete an article by slug', function () {
   it('should delete an article based on a slug word when calling http://localhost300/api/articles/:slug with DELETE method', function (done) {
     chai.request('http://localhost:3000/api')
     .delete('/articles/hello-world')

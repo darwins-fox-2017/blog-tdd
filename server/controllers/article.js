@@ -17,6 +17,27 @@ methods.getOneData = function(req,res,next) {
   })
 }
 
+methods.update = function (req,res,next) {
+  Article.findOne({slug: req.params.slug}, function (err, data) {
+    if (err) {
+      res.status(500).send(err)
+    }else{
+      data.title = req.body.title || data.title
+      data.content = req.body.content || data.content
+      data.catagory = req.body.catagory || data.catagory
+      data.slug = req.body.slug || data.slug
+
+      data.save(function (err) {
+        if (err) {
+          res.send(err)
+        }else{
+          res.send({msg : 'data has been successfully updated'})
+        }
+      })
+    }
+  })
+}
+
 methods.create = function (req,res,next) {
   let newArticle = new Article(req.body)
 
