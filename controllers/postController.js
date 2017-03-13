@@ -9,7 +9,6 @@ module.exports = {
     })
   },
   create: function(req, res, next){
-    console.log(req.body);
     let published = req.body.published == 'true'
     db.Post.create({
       title: req.body.title,
@@ -22,7 +21,10 @@ module.exports = {
         msg: 'Post saved'
       })
     })
-
-
+  },
+  show: function(req, res, next){
+    db.Post.findById(req.params.id).then((post) => {
+      res.json(post)
+    })
   }
 }

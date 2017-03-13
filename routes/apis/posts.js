@@ -5,6 +5,7 @@ var postController = require('../../controllers/postController')
 
 /* GET users listing. */
 router.get('/', postController.index);
+router.get('/:id', postController.show);
 
 router.post('/', postController.create)
 
