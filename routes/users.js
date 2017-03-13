@@ -8,6 +8,6 @@ router.get('/api/article', controllerArticle.getArticle);
 
 router.post('/api/article', controllerArticle.createArticle);
 
-router.put('/api/article', controllerArticle.updateArticle);
+router.put('/api/article/:slug', controllerArticle.updateArticle);
 
 module.exports = router;

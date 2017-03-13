@@ -34,7 +34,7 @@ module.exports = {
   updateArticle : (req, res, next) => {
     Article.findOneAndUpdate(
       {
-        slug: slug(req.body.title).toLowerCase()
+        slug: req.params.slug
       }, req.body, {new: true}, (err, articles) => {
         if (err) {
           res.send(err)

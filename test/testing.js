@@ -46,7 +46,7 @@ describe('Posting new article', () => {
 describe('Editing an article', () => {
       it('should store an edited article to the database and return data', (done) => {
             chai.request('http://localhost:3000')
-            .put('/users/api/article?slug=hello-world')
+            .put('/users/api/article/hello-world')
             .send({
                   title: 'Hello World!',
                   content: 'Lorem ipsum dolor sit amet',
