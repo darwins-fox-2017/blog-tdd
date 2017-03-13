@@ -15,11 +15,11 @@ module.exports = {
     })
   },
   login: function(req, res) {
-    User.find({username:req.body.username}, function(err, data){
+    User.findOne({username:req.body.username}, function(err, data){
       if (err){
         res.send(err)
       }
-      else if(hash.verify(req.body.password, data.password)){
+      if(hash.verify(req.body.password, data.password)){
         res.send(data)
       }else{
         res.send('check your authentication')
