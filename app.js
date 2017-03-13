@@ -1,13 +1,13 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var morgan = require('morgan')
+var express     = require('express');
+var bodyParser  = require('body-parser');
+var morgan      = require('morgan')
 
-var users = require('./routes/users');
+var users       = require('./routes/users');
 
-var mongoose = require('mongoose');
+var mongoose    = require('mongoose');
 mongoose.connect('mongodb://localhost/blog')
 
-var app = express();
+var app         = express();
 
 app.use(morgan())
 app.use(bodyParser.json());
