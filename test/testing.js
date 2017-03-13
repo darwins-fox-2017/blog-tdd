@@ -67,3 +67,35 @@ describe('Editing an article', () => {
             })
       })
 })
+
+describe('Deleting an article', () => {
+      it('should delete an article from the database', (done) => {
+            chai.request('http://localhost:3000')
+            .delete('/users/api/article/hello-world')
+            .end((err,res) => {
+                  if(err){
+                    done(err);
+                  } else {
+                    res.should.be.json;
+                    res.should.have.status(200);
+                    res.body.title.should.equal('Hello World!');
+                    res.body.content.should.equal('Lorem ipsum dolor sit amet');
+                    res.body.category.should.equal('Learning');
+                    res.body.slug.should.equal('hello-world');
+                    done();
+                  }
+            })
+      })
+})
+
+describe('Getting an article', () => {
+      it('should show one article', (done) => {
+            chai.request('http://localhost:3000')
+            .get('/users/api/article/hello-world')
+            .end((err,res) => {
+                  res.should.be.json;
+                  res.should.have.status(200);
+                  done();
+            })
+      })
+})

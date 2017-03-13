@@ -42,5 +42,30 @@ module.exports = {
           res.send(articles);
         }
       })
+  },
+
+  deleteArticle : (req, res, next) => {
+    Article.findOneAndRemove(
+      {
+        slug: req.params.slug
+      }, (err, data) => {
+        if (err) {
+          res.send(err)
+        } else {
+          res.send(data);
+        }
+      })
+  },
+
+  getOneArticle : (req, res, next) => {
+    Article.find({
+      slug: req.params.slug
+    }, (err, article) => {
+      if (err) {
+        res.send(err)
+      } else {
+        res.status(200).json(article);
+      }
+    })
   }
 }

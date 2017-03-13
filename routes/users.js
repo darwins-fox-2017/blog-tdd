@@ -10,4 +10,8 @@ router.post('/api/article', controllerArticle.createArticle);
 
 router.put('/api/article/:slug', controllerArticle.updateArticle);
 
+router.delete('/api/article/:slug', controllerArticle.deleteArticle);
+
+router.get('/api/article/:slug', controllerArticle.getOneArticle);
+
 module.exports = router;
