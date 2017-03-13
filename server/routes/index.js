@@ -7,6 +7,12 @@ router.get('/', function(req, res, next) {
   res.send('index', { title: 'Express' });
 });
 
-router.get('/login', controller.login)
+router.post('/register', controller.register)
+
+router.post('/login', controller.login)
+
+router.delete('/login/:username', controller.deleteUser)
+
+
 
 module.exports = router;

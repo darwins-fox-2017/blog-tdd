@@ -15,20 +15,20 @@ module.exports = {
     })
   },
   login: function(req, res) {
-    User.find({username:req.body.username}, function(data){
+    User.find({username:req.body.username}, function(err, data){
       if (err){
         res.send(err)
-      }else{
-        if(hash.verify(req.body.password, data.password)){
-          res.send(data)
-        }else{
-          res.send('check your authentication')
-        }
       }
+      else if(hash.verify(req.body.password, data.password)){
+        res.send(data)
+      }else{
+        res.send('check your authentication')
+      }
+
     })
   },
   deleteUser: function(req,res) {
-    User.findOneAndRemove({slug:req.params.slug}, function(err, data){
+    User.findOneAndRemove({username:req.params.username}, function(err, data){
       if (err){
         res.send(err)
       }else{
