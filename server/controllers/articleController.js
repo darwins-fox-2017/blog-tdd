@@ -7,7 +7,7 @@ module.exports = {
       title: req.body.title,
       content: req.body.content,
       category: req.body.category,
-      slug: slug(req.body.title).toLowerCase
+      slug: slug(req.body.title).toLowerCase()
     }, function (err, data) {
       if (err) {
         res.send(err)
@@ -44,7 +44,7 @@ module.exports = {
     })
   },
   readArticle: function(req,res){
-    Article.find({slug:req.params.slug}, function(err,data){
+    Article.findOne({slug:req.params.slug}, function(err,data){
       if(err){
         res.send(err)
       }else{

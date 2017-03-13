@@ -2,12 +2,15 @@ var express = require('express');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var mongoose = require('mongoose')
 var index = require('./routes/index');
 var api = require('./routes/api');
 
 var app = express();
-
+mongoose.connect('mongodb://localhost/restaurant', function (err) {
+  if (err) throw err;
+  console.log("connected")
+})
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

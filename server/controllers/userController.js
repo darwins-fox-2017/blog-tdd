@@ -1,5 +1,5 @@
 var User = require('../models/user')
-var hash = require('passwrod-hash')
+var hash = require('password-hash')
 
 module.exports = {
   register: function(req, res) {
