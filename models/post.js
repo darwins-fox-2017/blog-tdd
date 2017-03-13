@@ -1,10 +1,10 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var post = sequelize.define('post', {
+  var Post = sequelize.define('Post', {
     title: DataTypes.STRING,
     body: DataTypes.STRING,
     slug: DataTypes.STRING,
-    status: DataTypes.BOOLEAN
+    published: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {
@@ -12,5 +12,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return post;
+  return Post;
 };

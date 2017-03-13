@@ -4,12 +4,8 @@ var router = express.Router();
 var postController = require('../../controllers/postController')
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get('/', postController.index);
 
-router.post('/', function(req, res, next){
-
-})
+router.post('/', postController.create)
 
 module.exports = router;

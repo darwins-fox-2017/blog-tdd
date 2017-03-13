@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('posts', {
+    return queryInterface.createTable('Posts', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,7 +17,7 @@ module.exports = {
       slug: {
         type: Sequelize.STRING
       },
-      status: {
+      published: {
         type: Sequelize.BOOLEAN
       },
       createdAt: {
@@ -31,6 +31,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('posts');
+    return queryInterface.dropTable('Posts');
   }
 };

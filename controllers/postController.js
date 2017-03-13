@@ -1,29 +1,25 @@
-let Post = require('../models/post')
+let db = require('../models')
+
+let slug = require('slug')
 
 module.exports = {
   index: function(req, res, next){
-    Post.find({}, function(err, posts){
-      if (err) {
-        res.json(err)
-      } else {
-        res.json(posts)
-      }
+    db.Post.findAll().then(function(posts){
+      res.json(posts)
     })
   },
-  createL function(req, res, next){
-    let post = new Post({
+  create: function(req, res, next){
+    console.log(req.body);
+    let published = req.body.published == 'true'
+    db.Post.create({
       title: req.body.title,
       body: req.body.body,
-      slug: null,
-      status: req.body.status
+      slug: slug(req.body.title),
+      published: published
+    }).then(() => {
+      res.json({msg: 'Post saved'})
     })
 
-    post.save(function(err){
-      if (err) {
-        res.json(err)
-      } else {
-        res.json({msg: 'Post saved'})
-      }
-    })
+
   }
 }
