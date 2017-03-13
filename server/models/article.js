@@ -2,7 +2,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-var artikelSchema = new Schema({
+var articleSchema = new Schema({
   title: {type: String, unique: true},
   content: String,
   category: String,
@@ -12,6 +12,6 @@ var artikelSchema = new Schema({
     timestamp: true
   })
 
-var Artikel = mongoose.model('Artikel', artikelSchema)
+var Article = mongoose.model('Article', articleSchema)
 
-module.exports = Artikel
+module.exports = Article
