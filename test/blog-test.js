@@ -23,9 +23,10 @@ describe('Server is running test', () => {
 
 describe('CRUD Post test', () => {
   describe('Read all data', () => {
-    it('Should be return array of post when try to access "/"', (done) => {
-      chai.request('http://localhost:3000').get('/posts').end((err, res) => {
+    it('Should be return array of post when try to access "/api.posts/"', (done) => {
+      chai.request('http://localhost:3000').get('/api/posts').end((err, res) => {
         if (err) {
+          console.log(err);
           done()
         } else {
           res.should.have.status(200);
@@ -36,6 +37,27 @@ describe('CRUD Post test', () => {
           res.body[0].should.have.property('slug');
           done()
         }
+      });
+    })
+  })
+  describe('Create a post', () => {
+    it('Should be return success message when try to create post "/"', (done) => {
+      chai.request('http://localhost:3000')
+        .post('/api/posts')
+        .send({
+          title: 'Test from Chai',
+          body: 'Ini body test bukan bodyParser',
+          published: true
+        })
+        .end((err, res) => {
+          if (err) {
+            done()
+          } else {
+            res.should.have.status(200);
+            res.should.be.json;
+            res.body.status.should.equal(true)
+            done()
+          }
       });
     })
   })

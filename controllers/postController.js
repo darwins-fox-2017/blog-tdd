@@ -14,10 +14,13 @@ module.exports = {
     db.Post.create({
       title: req.body.title,
       body: req.body.body,
-      slug: slug(req.body.title),
+      slug: slug(req.body.title, {lower: true}),
       published: published
     }).then(() => {
-      res.json({msg: 'Post saved'})
+      res.json({
+        status: true,
+        msg: 'Post saved'
+      })
     })
 
 
