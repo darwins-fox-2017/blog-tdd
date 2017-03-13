@@ -10,7 +10,7 @@ describe('Testing route API', function () {
       .send({
         title: "This is Title",
         content: "This is Content, where is the main article",
-        category: "Cooking",
+        category: "Cooking"
       })
       .end(function (err,res) {
         res.should.be.json;
@@ -49,7 +49,7 @@ describe('Testing route API', function () {
     chai.request('http://localhost:3000')
       .put('/api/article/this-is-title')
       .send({
-        content: "This is Content, will provide issue about node js",
+        content: "This is Content, will provide issue about node js"
       })
       .end(function (err,res) {
         res.should.be.json;
