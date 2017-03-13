@@ -6,7 +6,7 @@
         <el-submenu index="2">
             <template slot="title">Post
             </template>
-            <el-menu-item index="2-1"><router-link to="/items">Show All</router-link></el-menu-item>
+            <el-menu-item index="2-1"><router-link to="/posts">Show All</router-link></el-menu-item>
             <el-menu-item index="2-2">Create</el-menu-item>
           </el-submenu>
       <el-menu-item index="3">Comments</el-menu-item>
