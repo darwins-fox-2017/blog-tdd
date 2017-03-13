@@ -78,4 +78,40 @@ describe('CRUD Post test', () => {
       });
     })
   })
+  describe('Update a post', () => {
+    it('Should be return success message when try to Update blogpost "/api/posts/1"', (done) => {
+      chai.request(serverHost)
+        .put('/api/posts/1')
+        .send({
+          title: 'Test from Chai Updated',
+          body: 'Ini body test bukan bodyParser Updated',
+          published: true
+        })
+        .end((err, res) => {
+          if (err) {
+            done(err)
+          } else {
+            res.should.have.status(200);
+            res.should.be.json;
+            res.body.status.should.equal(true)
+            done()
+          }
+      });
+    })
+  })
+  describe('Detele single post', () => {
+    it('Should be return success message when try to delete single blogpost "/api/posts/2"', (done) => {
+      chai.request(serverHost).delete('/api/posts/2').end((err, res) => {
+        if (err) {
+          done(err)
+        } else {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.an('object')
+          res.body.status.should.equal(true)
+          done()
+        }
+      });
+    })
+  })
 })
