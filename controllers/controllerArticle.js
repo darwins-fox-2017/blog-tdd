@@ -1,18 +1,8 @@
 'use strict'
-var Article = require('../models/article.js');
-var slug    = require('slug')
+var Article       = require('../models/article.js');
+var slug          = require('slug')
 
 module.exports = {
-  getArticle : (req, res, next) => {
-    Article.find({}, (err, articles) => {
-      if (err) {
-        res.send(err)
-      } else {
-        res.status(200).json(articles);
-      }
-    })
-  },
-
   createArticle : (req, res, next) => {
     var newArticle = Article(
       {
@@ -27,6 +17,28 @@ module.exports = {
         res.send(err)
       } else {
         res.send(data)
+      }
+    })
+  },
+
+  getArticle : (req, res, next) => {
+    Article.find({}, (err, articles) => {
+      if (err) {
+        res.send(err)
+      } else {
+        res.status(200).json(articles);
+      }
+    })
+  },
+
+  getOneArticle : (req, res, next) => {
+    Article.find({
+      slug: req.params.slug
+    }, (err, article) => {
+      if (err) {
+        res.send(err)
+      } else {
+        res.status(200).json(article);
       }
     })
   },
@@ -55,17 +67,6 @@ module.exports = {
           res.send(data);
         }
       })
-  },
-
-  getOneArticle : (req, res, next) => {
-    Article.find({
-      slug: req.params.slug
-    }, (err, article) => {
-      if (err) {
-        res.send(err)
-      } else {
-        res.status(200).json(article);
-      }
-    })
   }
+
 }
