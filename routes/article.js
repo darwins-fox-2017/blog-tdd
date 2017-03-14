@@ -6,7 +6,7 @@ const controllerArticle = require('../controllers/controllerArticle')
 /* GET users listing. */
 router.post('/', controllerArticle.createArticle);
 
-router.get('/', controllerArticle.getArticle);
+router.get('/', controllerArticle.getArticles);
 
 router.get('/:slug', controllerArticle.getOneArticle);
 

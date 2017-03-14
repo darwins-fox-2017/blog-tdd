@@ -16,12 +16,12 @@ module.exports = {
       if (err) {
         res.send(err)
       } else {
-        res.send(data)
+        res.status(200).json(data)
       }
     })
   },
 
-  getArticle : (req, res, next) => {
+  getArticles : (req, res, next) => {
     Article.find({}, (err, articles) => {
       if (err) {
         res.send(err)
@@ -47,11 +47,11 @@ module.exports = {
     Article.findOneAndUpdate(
       {
         slug: req.params.slug
-      }, req.body, {new: true}, (err, articles) => {
+      }, req.body, {new: true}, (err, article) => {
         if (err) {
           res.send(err)
         } else {
-          res.send(articles);
+          res.status(200).json(article);
         }
       })
   },
@@ -64,7 +64,7 @@ module.exports = {
         if (err) {
           res.send(err)
         } else {
-          res.send(data);
+          res.status(200).json(data);
         }
       })
   }
