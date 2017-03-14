@@ -7,4 +7,5 @@ router.get('/articles/:slug', Article.getOneData)
 router.put('/articles/:slug', Article.update)
 router.post('/articles', Article.create)
 router.delete('/articles/:slug', Article.delete)
+
 module.exports = router
