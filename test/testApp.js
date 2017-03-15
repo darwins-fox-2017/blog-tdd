@@ -2,6 +2,7 @@ const chai = require('../server/node_modules/chai');
 const chaiHttp = require('../server/node_modules/chai-http');
 const should = chai.should()
 const Article = require('../server/models/article');
+const jwt = require('../server/node_modules/jsonwebtoken')
 
 chai.use(chaiHttp)
 
@@ -73,6 +74,22 @@ describe('delete an article by slug', function () {
     .end(function (err,res) {
       res.should.have.status(200);
       res.body.msg.should.equal('data has been successfully removed from database')
+      done()
+    })
+  })
+})
+
+describe('login succeed', function () {
+  it('should get token if login is succeed', function (done) {
+    chai.request('http://localhost:3000/api')
+    .post('/login')
+    .send({
+      username : 'firman',
+      password : 'firman'
+    })
+    .end(function (err,res) {
+      res.should.have.status(200)
+      jwt.verify(res.body.token, 'kukukakikakakkukakukaku').username.should.equal('firman')
       done()
     })
   })

@@ -33,6 +33,7 @@ methods.login = function (req,res,next) {
       if (hash.verify(`${req.body.password}`, user.password)) {
         let token = jwt.sign({ username: user.username }, 'kukukakikakakkukakukaku', { expiresIn: '1d' });
         res.send({ token: token })
+
       }else{
         res.send({msg : 'Password is invalid'})
       }
